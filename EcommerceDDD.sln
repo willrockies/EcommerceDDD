@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Entities", "5 - Entities", "{4ECB33EC-A55F-4AEF-8CCE-EDE77297DE2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entitites", "Entitites\Entitites.csproj", "{C2A512E2-8801-4CE9-8A13-0C38BC5EA4AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entitites\Entities.csproj", "{C2A512E2-8801-4CE9-8A13-0C38BC5EA4AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrasctruture", "Infrasctruture\Infrasctruture.csproj", "{04B73CEC-BB90-460F-B9CB-2DF8E173749B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrasctruture", "Infrasctruture\Infrasctruture.csproj", "{04B73CEC-BB90-460F-B9CB-2DF8E173749B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{8D2FCA90-BED1-4710-B4EB-45F7466BE76E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{8D2FCA90-BED1-4710-B4EB-45F7466BE76E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationApp", "ApplicationApp\ApplicationApp.csproj", "{CAA35C3F-8595-463D-9F74-75E0A24AADD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationApp", "ApplicationApp\ApplicationApp.csproj", "{CAA35C3F-8595-463D-9F74-75E0A24AADD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
