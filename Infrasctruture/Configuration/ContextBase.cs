@@ -15,6 +15,7 @@ namespace Infrasctruture.Configuration
         }
 
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<CompraUsuario> CompraUsuario { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
