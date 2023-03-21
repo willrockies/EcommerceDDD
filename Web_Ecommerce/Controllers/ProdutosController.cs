@@ -2,6 +2,7 @@
 using Entities.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Threading.Tasks;
@@ -11,15 +12,19 @@ namespace Web_Ecommerce.Controllers
     [Authorize]
     public class ProdutosController : Controller
     {
+        public readonly UserManager<ApplicationUser> _userManager;
         private readonly IProdutoApp _IProdutoApp;
-        public ProdutosController(IProdutoApp IProductoApp)
+        public ProdutosController(IProdutoApp IProductoApp, UserManager<ApplicationUser> userManager)
         {
             _IProdutoApp = IProductoApp;
+            _userManager = userManager;
         }
         // GET: ProdutosController
         public async Task<IActionResult> Index()
         {
-            return View(await _IProdutoApp.List());
+            var idUsuario = await RetornarIdUsuarioLogado();
+
+            return View(await _IProdutoApp.ListarProdutosUsuario(idUsuario));
         }
 
         // GET: ProdutosController/Details/5
@@ -41,6 +46,9 @@ namespace Web_Ecommerce.Controllers
         {
             try
             {
+                var idUsuario = await RetornarIdUsuarioLogado();
+                produto.UserId = idUsuario;
+
                 await _IProdutoApp.AddProduto(produto);
                 if (produto.notificacoes.Any())
                 {
@@ -48,13 +56,13 @@ namespace Web_Ecommerce.Controllers
                     {
                         ModelState.AddModelError(item.NomePropriedade, item.mensagem);
                     }
-                    return View("Edit", produto);
+                    return View("Create", produto);
                 }
 
             }
             catch
             {
-                return View("Edit", produto);
+                return View("Create", produto);
             }
 
             return RedirectToAction(nameof(Index));
@@ -115,5 +123,13 @@ namespace Web_Ecommerce.Controllers
                 return View();
             }
         }
+
+        private async Task<string> RetornarIdUsuarioLogado()
+        {
+            var idUsuario = await _userManager.GetUserAsync(User);
+
+            return idUsuario.Id;
+        }
+
     }
 }
