@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Entities.Entities
 {
-    [Table("Product")]
+    [Table("TB_Produto")]
     public class Produto : Notifies
     {
         [Column("PRD_ID")]
