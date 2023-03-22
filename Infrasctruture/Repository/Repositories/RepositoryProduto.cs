@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,15 @@ namespace Infrasctruture.Repository.Repositories
         {
             _optionsBuilder = new DbContextOptions<ContextBase>();
         }
+
+        public async Task<List<Produto>> ListarProdutos(Expression<Func<Produto, bool>> exProduto)
+        {
+            using (var dataBase = new ContextBase(_optionsBuilder))
+            {
+                return await dataBase.Produtos.Where(exProduto).AsNoTracking().ToListAsync();
+            }
+        }
+
         public async Task<List<Produto>> ListarProdutosUsuario(string userId)
         {
             using(var dataBase = new ContextBase(_optionsBuilder))
