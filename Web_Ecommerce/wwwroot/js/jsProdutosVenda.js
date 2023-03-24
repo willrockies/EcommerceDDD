@@ -3,8 +3,8 @@
 objetoVenda.adicionarCarrinho = function (idProduto) {
 
 
-    var idNome = $('#nome_' + idProduto).val();
-    var idQtd = $('#qtd_' + idProduto).val();
+    var nome = $('#nome_' + idProduto).val();
+    var quantidade = $('#qtd_' + idProduto).val();
 
     $.ajax({
         type: 'POST',
@@ -15,10 +15,14 @@ objetoVenda.adicionarCarrinho = function (idProduto) {
         data: {
             'id': idProduto,
             'nome': nome,
-            'qtd': qtd
+            'quantidade': quantidade
         },
         success: function (data) {
-
+            if (data.sucesso) {
+                objetoAlert.AlertaTela(1, "Produto adicionado no carrinho")
+            } else {
+                objetoAlert.AlertaTela(2, "Usuário não logado")
+            }
 
         }
     });
@@ -54,6 +58,16 @@ objetoVenda.carregaProdutos = function () {
     });
 }
 
+objetoVenda.carregaQtdCarrinho = function () {
+    $('#qtdCarrinho').text('(0)');
+
+    setTimeout(() => {
+        objetoVenda.carregaQtdCarrinho
+        console.log('teste');
+    }, 10000);
+}
+
 $(function () {
     objetoVenda.carregaProdutos();
+    objetoVenda.carregaQtdCarrinho();
 });

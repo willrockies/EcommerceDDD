@@ -2,3 +2,28 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+var objetoAlert = new Object();
+objetoAlert.AlertaTela = function (tipo, mensagem) {
+    $('#alert').html('');
+
+    var classeTipoAlerta = '';
+    if (tipo == 1) {
+        classeTipoAlerta = 'alert alert-success';
+    } else if (tipo == 2) {
+        classeTipoAlerta = 'alert alert-warning';
+    } else if (tipo == 3) {
+        classeTipoAlerta = 'alert alert-danger';
+    }
+    var divAlert = $('<div>', { class: classeTipoAlerta });
+    divAlert.append('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>');
+    divAlert.append('<strong>' + mensagem + '</strong>');
+
+    $('#alert').html(divAlert);
+
+    window.setTimeout(function () {
+        $('.alert').fadeTo(1500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 5000);
+}

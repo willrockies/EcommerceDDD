@@ -1,6 +1,7 @@
 using ApplicationApp.Interfaces;
 using ApplicationApp.OpenApp;
 using Domain.Interfaces.Generics;
+using Domain.Interfaces.InterfaceCompraUsuario;
 using Domain.Interfaces.InterfaceProduct;
 using Domain.Interfaces.InterfaceServices;
 using Domain.Services;
@@ -48,9 +49,12 @@ namespace Web_Ecommerce
             //Interface e Repositorio
             services.AddSingleton(typeof(IGeneric<>), typeof(RepositoryGenerics<>));
             services.AddSingleton<IProduct, RepositoryProduto>();
+            services.AddSingleton<ICompraUsuario, RepositoryCompraUsuario>();
 
             //Interface Aplicação
             services.AddSingleton<IProdutoApp, AppProduto>();
+            services.AddSingleton<ICompraUsuarioApp, AppCompraUsuario>();
+            
 
             // Serviço Dominio
             services.AddSingleton<IServiceProduct, ServiceProduct>();
