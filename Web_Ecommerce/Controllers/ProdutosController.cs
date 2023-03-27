@@ -14,10 +14,12 @@ namespace Web_Ecommerce.Controllers
     {
         public readonly UserManager<ApplicationUser> _userManager;
         private readonly IProdutoApp _IProdutoApp;
-        public ProdutosController(IProdutoApp IProductoApp, UserManager<ApplicationUser> userManager)
+        private readonly ICompraUsuarioApp _compraUsuarioApp;
+        public ProdutosController(IProdutoApp IProductoApp, UserManager<ApplicationUser> userManager, ICompraUsuarioApp compraUsuarioApp)
         {
             _IProdutoApp = IProductoApp;
             _userManager = userManager;
+            _compraUsuarioApp = compraUsuarioApp;
         }
         // GET: ProdutosController
         public async Task<IActionResult> Index()
@@ -143,6 +145,34 @@ namespace Web_Ecommerce.Controllers
             return Json(await _IProdutoApp.ListarProdutosComEstoque());
         }
 
+        public async Task<IActionResult> ListarProdutosCarrinhoUsuario() 
+        {
+            var idUsuario = await RetornarIdUsuarioLogado();
+            return View(await _IProdutoApp.ListarProdutosCarrinhoUsuario(idUsuario));
+        }
+
+        public async Task<IActionResult> RemoverCarrinho(int id)
+        {
+            return View(await _IProdutoApp.ObterProdutosCarrinho(id));
+        }
+
+        // POST: ProdutosController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoverCarrinho(int id, Produto produto)
+        {
+            try
+            {
+
+                var produtoDeletar = await _compraUsuarioApp.GetEntityById(id);
+                await _compraUsuarioApp.Delete(produtoDeletar);
+                return RedirectToAction(nameof(ListarProdutosCarrinhoUsuario));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
     }
 }

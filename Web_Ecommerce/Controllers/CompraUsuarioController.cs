@@ -44,5 +44,22 @@ namespace Web_Ecommerce.Controllers
                 sucesso = false
             });
         }
+
+        [HttpGet("/api/QtdProdutosCarrinho")]
+        public async Task<JsonResult> QtdProdutosCarrinho()
+        {
+            var usuario = await _userManager.GetUserAsync(User);
+
+            var qtd = 0;
+
+            if(usuario != null)
+            {
+                qtd =  await _compraUsuarioApp.QuantidadeProdutoCarrinhoUsuario(usuario.Id);
+
+                return Json(new { sucesso = true , qtd }); 
+            }
+
+            return Json(new { sucesso = false, qtd });
+        }
     }
 }
