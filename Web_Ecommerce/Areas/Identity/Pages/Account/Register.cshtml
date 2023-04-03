@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -17,11 +17,53 @@
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+
+              <div class="form-group">
+                <label asp-for="Input.Nome"></label>
+                <input asp-for="Input.Nome" class="form-control" />
+                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+            </div>
+
+                <div class="form-group">
+                <label asp-for="Input.CPF"></label>
+                <input asp-for="Input.CPF" class="form-control" />
+                <span asp-validation-for="Input.CPF" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Input.Idade"></label>
+                <input asp-for="Input.Idade" class="form-control" />
+                <span asp-validation-for="Input.Idade" class="text-danger"></span>
+            </div>
+               <div class="form-group">
+                <label asp-for="Input.Endereco"></label>
+                <input asp-for="Input.Endereco" class="form-control" />
+                <span asp-validation-for="Input.Endereco" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Input.ComplementoEndereco"></label>
+                <input asp-for="Input.ComplementoEndereco" class="form-control" />
+                <span asp-validation-for="Input.ComplementoEndereco" class="text-danger"></span>
+            </div>
             <div class="form-group">
+                <label asp-for="Input.CEP"></label>
+                <input asp-for="Input.CEP" class="form-control" />
+                <span asp-validation-for="Input.CEP" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Input.Celular"></label>
+                <input asp-for="Input.Celular" class="form-control" />
+                <span asp-validation-for="Input.Celular" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Input.Telefone"></label>
+                <input asp-for="Input.Telefone" class="form-control" />
+                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+            </div>
+              <div class="form-group">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
+                </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
@@ -32,30 +74,29 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Use another service to register.</h4>
+            <h4>Complete os seus dados.</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
+                                  <div>
+                                    <p>
+                                        Cadastre-se na loja virtual para encontrar todos os produtos que você precisa
+                                    </p>
+                                </div>
                 }
                 else
                 {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
+                                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                    <div>
+                                        <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Utilize seu email @provider.DisplayName account">@provider.DisplayName</button>
                                 }
-                            </p>
-                        </div>
-                    </form>
+                                        </p>
+                                        </div>
+                                </form>
                 }
             }
         </section>
@@ -63,5 +104,5 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+                                                            <partial name="_ValidationScriptsPartial" />
 }
