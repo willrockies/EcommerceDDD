@@ -44,7 +44,8 @@ namespace Infrasctruture.Repository.Repositories
                                                          Observacao = p.Observacao,
                                                          Valor = p.Valor,
                                                          QtdCompra= c.QtdCompra,
-                                                         IdProdutoCarrinho = c.Id
+                                                         IdProdutoCarrinho = c.Id,
+                                                         Url = p.Url
 
                                                      }).AsNoTracking().ToListAsync();
                 return produtosCarrinhoUsuario;
@@ -66,7 +67,8 @@ namespace Infrasctruture.Repository.Repositories
                                                          Observacao = p.Observacao,
                                                          Valor = p.Valor,
                                                          QtdCompra = c.QtdCompra,
-                                                         IdProdutoCarrinho = c.Id
+                                                         IdProdutoCarrinho = c.Id,
+                                                         Url = p.Url
 
                                                      }).AsNoTracking().FirstOrDefaultAsync();
                 return produtosCarrinhoUsuario;

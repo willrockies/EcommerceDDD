@@ -44,7 +44,13 @@ objetoVenda.carregaProdutos = function () {
                 var idQtd = 'qtd_' + entities.id;
 
                 htmlConteudo += "<label id='" + idNome + "'> Produto: " + entities.nome + "</label></br>";
-                htmlConteudo += "<label > Valor: " + entities.valor + "</label></br>";
+                
+                if (entities.url != null && entities.url != "" && entities.url != undefined) {
+                    htmlConteudo += "<img width='200px' height='100px' src='" + entities.url + "'/> </br>";
+                }
+
+                htmlConteudo += " <br/><label > Valor: " + entities.valor + "</label>";
+                
                 htmlConteudo += "Quantidade : <input type'number' value='1' id='" + idQtd + "'>";
 
                 htmlConteudo += "<input type='button' onclick='objetoVenda.adicionarCarrinho(" + entities.id + ")' value='Comprar'> </br>";

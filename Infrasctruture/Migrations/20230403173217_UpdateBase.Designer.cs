@@ -4,14 +4,16 @@ using Infrasctruture.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrasctruture.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230403173217_UpdateBase")]
+    partial class UpdateBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
