@@ -29,41 +29,48 @@ objetoVenda.adicionarCarrinho = function (idProduto) {
 }
 
 objetoVenda.carregaProdutos = function () {
+
     $.ajax({
         type: 'GET',
-        url: '/api/ListarProdutosComEstoque',
-        dataType: 'JSON',
+        url: "/api/ListarProdutosComEstoque",
+        dataType: "JSON",
         cache: false,
         async: true,
         success: function (data) {
-            var htmlConteudo = '';
+            console.log(objetoVenda.adicionarCarrinho(entities.id));
+            var htmlConteudo = "";
+
             data.forEach(function (entities) {
-                htmlConteudo += "<div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>";
 
-                var idNome = 'nome_' + entities.id;
-                var idQtd = 'qtd_' + entities.id;
+                htmlConteudo += " <div class='col-xs-12 col-sm-4 col-md-4 col-lg-4'>";
 
-                htmlConteudo += "<label id='" + idNome + "'> Produto: " + entities.nome + "</label></br>";
-                
+                var idNome = "nome_" + entities.id;
+                var idQtd = "qtd_" + entities.qtd;
+
+                htmlConteudo += "</br><label id='" + idNome + "' > Produto: " + entities.nome + "</label></br>";
+
                 if (entities.url != null && entities.url != "" && entities.url != undefined) {
-                    htmlConteudo += "<img width='200px' height='100px' src='" + entities.url + "'/> </br>";
+
+                    htmlConteudo += "<img width='200' height='100' src='" + entities.url + "'/></br>";
                 }
 
-                htmlConteudo += " <br/><label > Valor: " + entities.valor + "</label>";
-                
+                htmlConteudo += "<label>  Valor: " + entities.valor + "</label></br>";
+
                 htmlConteudo += "Quantidade : <input type'number' value='1' id='" + idQtd + "'>";
 
-                htmlConteudo += "<input type='button' onclick='objetoVenda.adicionarCarrinho(" + entities.id + ")' value='Comprar'> </br>";
+                htmlConteudo += "<input type='button' onclick='objetoVenda.adicionarCarrinho(" + entities.id + ")' value ='Comprar'> </br> ";
 
-                htmlConteudo += "</div>";
+                htmlConteudo += " </div>";
 
-                $("#divVenda").html(htmlConteudo);
+                
+
             });
+
+            $("#divVenda").html(htmlConteudo);
         }
-
     });
-}
 
+}
 objetoVenda.carregaQtdCarrinho = function () {
 
 
