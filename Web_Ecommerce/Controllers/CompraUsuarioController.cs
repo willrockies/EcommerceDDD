@@ -1,24 +1,33 @@
 ﻿using ApplicationApp.Interfaces;
 using Entities.Entities;
 using Entities.Entities.Enums;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Web_Ecommerce.Models;
 
 namespace Web_Ecommerce.Controllers
 {
-    public class CompraUsuarioController : Controller
+    public class CompraUsuarioController : HelpQrCode
     {
         public readonly UserManager<ApplicationUser> _userManager;
         public readonly ICompraUsuarioApp _compraUsuarioApp;
+        private IWebHostEnvironment _environment;
 
-        public CompraUsuarioController(UserManager<ApplicationUser> userManager, ICompraUsuarioApp compraUsuarioApp)
+        public CompraUsuarioController(
+            UserManager<ApplicationUser> userManager,
+            ICompraUsuarioApp compraUsuarioApp,
+            IWebHostEnvironment environment
+            )
         {
             _userManager = userManager;
             _compraUsuarioApp = compraUsuarioApp;
+            _environment = environment; 
         }
 
+        
         public async Task<IActionResult> FinalizarCompra()
         {
             var usuario = await _userManager.GetUserAsync(User);
@@ -52,6 +61,13 @@ namespace Web_Ecommerce.Controllers
             {
                 return RedirectToAction("FinalizarCompra");
             }
+        }
+        public async Task<IActionResult> Imprimir()
+        {
+            var usuario = await _userManager.GetUserAsync(User);
+            var compraUsuario = await _compraUsuarioApp.ProdutosComprados(usuario.Id);
+
+            return await Download(compraUsuario, _environment);
         }
 
         [HttpPost("/api/AdicionarProdutoCarrinho")]
