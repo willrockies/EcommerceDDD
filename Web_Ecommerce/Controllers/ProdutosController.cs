@@ -147,9 +147,9 @@ namespace Web_Ecommerce.Controllers
 
         [AllowAnonymous]
         [HttpGet("/api/ListarProdutosComEstoque")]
-        public async Task<JsonResult> ListarProdutosComEstoque()
+        public async Task<JsonResult> ListarProdutosComEstoque(string descricao)
         {
-            return Json(await _IProdutoApp.ListarProdutosComEstoque());
+            return Json(await _IProdutoApp.ListarProdutosComEstoque(descricao));
         }
 
         public async Task<IActionResult> ListarProdutosCarrinhoUsuario()
@@ -202,7 +202,7 @@ namespace Web_Ecommerce.Controllers
 
                     produtoTela.Imagem.CopyTo(new FileStream(diretorioArquivoSalvar, FileMode.Create));
 
-                    produto.Url = string.Concat("https://localhost:44375", "/imgProdutos/", NomeArquivo);
+                    produto.Url = string.Concat("https://localhost:5001", "/imgProdutos/", NomeArquivo);
 
                     await _IProdutoApp.UpdateProduto(produto);
                 }

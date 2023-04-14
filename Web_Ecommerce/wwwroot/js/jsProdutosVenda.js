@@ -28,7 +28,7 @@ objetoVenda.adicionarCarrinho = function (idProduto) {
     });
 }
 
-objetoVenda.carregaProdutos = function () {
+objetoVenda.carregaProdutos = function (descricao) {
 
     $.ajax({
         type: 'GET',
@@ -36,8 +36,10 @@ objetoVenda.carregaProdutos = function () {
         dataType: "JSON",
         cache: false,
         async: true,
+        data: { descricao: descricao },
+
         success: function (data) {
-            console.log(objetoVenda.adicionarCarrinho(entities.id));
+            
             var htmlConteudo = "";
 
             data.forEach(function (entities) {
@@ -62,7 +64,7 @@ objetoVenda.carregaProdutos = function () {
 
                 htmlConteudo += " </div>";
 
-                
+
 
             });
 
@@ -94,4 +96,12 @@ objetoVenda.carregaQtdCarrinho = function () {
 $(function () {
     objetoVenda.carregaProdutos();
     objetoVenda.carregaQtdCarrinho();
+
+    $("#buscar").click(
+        function () {
+
+            var descricao = $("#descricao").val();
+            objetoVenda.carregaProdutos(descricao);
+        }
+    );
 });
